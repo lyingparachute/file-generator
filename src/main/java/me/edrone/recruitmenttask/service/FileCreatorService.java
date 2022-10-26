@@ -28,5 +28,20 @@ public class FileCreatorService {
                 .reduce(1, (int x, int y) -> x * y);
     }
 
+    public HashSet<String> getSetOfStrings(char[] chars, int targetStringLength, int numberOfTargetStrings) throws Exception{
+        HashSet<String> setOfStrings = new HashSet<>();
+        if (isNumberOfTargetStringsTooBig(chars, targetStringLength, numberOfTargetStrings)){
+            throw new Exception();
+        }
+        while (setOfStrings.size() < numberOfTargetStrings) {
+            String randomString = RandomStringUtils.random(targetStringLength, chars);
+            setOfStrings.add(randomString);
+        }
+        return setOfStrings;
+    }
+
+    private boolean isNumberOfTargetStringsTooBig(char[] chars, int targetStringLength, int numberOfTargetStrings) {
+        return numberOfTargetStrings > getNumberOfPossibleCombinationsVariation(chars, targetStringLength);
+    }
 
 }
