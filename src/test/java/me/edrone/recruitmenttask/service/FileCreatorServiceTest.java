@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.HashSet;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -14,13 +16,13 @@ class FileCreatorServiceTest {
 
 
     @Test
-    void getNumberOfPossibleCombinationsGivenCharArrayAndLengthOfResultString() {
+    void getNumberOfPossibleCombinationsGivenCharArrayAndLengthOfTargetString() {
         //given
         char[] givenChars = {'a', 'b', 'c', 'd', 'e'};
-        int lengthOfResultString = 3;
+        int targetStringLength = 3;
         Integer expected = 60;
         //when
-        Integer actual = fileCreatorService.getNumberOfPossibleCombinations(givenChars, lengthOfResultString);
+        Integer actual = fileCreatorService.getNumberOfPossibleCombinations(givenChars, targetStringLength);
         //then
         assertThat(actual).isEqualTo(expected);
         assertThat(fileCreatorService.getNumberOfPossibleCombinations(givenChars, 4)).isEqualTo(120);
