@@ -4,10 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.persistence.Access;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class FileCreatorServiceTest {
@@ -23,11 +20,11 @@ class FileCreatorServiceTest {
         int lengthOfResultString = 3;
         Integer expected = 60;
         //when
-        Integer actual = fileCreatorService.numberOfPossibleCombinations(givenChars, lengthOfResultString);
+        Integer actual = fileCreatorService.getNumberOfPossibleCombinations(givenChars, lengthOfResultString);
         //then
         assertThat(actual).isEqualTo(expected);
-        assertThat(fileCreatorService.numberOfPossibleCombinations(givenChars, 4)).isEqualTo(120);
-        assertThat(fileCreatorService.numberOfPossibleCombinations(givenChars, 5)).isEqualTo(120);
+        assertThat(fileCreatorService.getNumberOfPossibleCombinations(givenChars, 4)).isEqualTo(120);
+        assertThat(fileCreatorService.getNumberOfPossibleCombinations(givenChars, 5)).isEqualTo(120);
     }
 
     @Test
