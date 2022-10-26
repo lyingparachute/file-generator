@@ -30,6 +30,19 @@ class FileCreatorServiceTest {
     }
 
     @Test
+    void getNumberOfPossibleCombinationsVariationGivenCharArrayAndLengthOfTargetString() {
+        //given
+        char[] givenChars = {'a', 'b', 'c', 'd', 'e'};
+        int targetStringLength = 3;
+        Integer expected = 125;
+        //when
+        Integer actual = fileCreatorService.getNumberOfPossibleCombinationsVariation(givenChars, targetStringLength);
+        //then
+        assertThat(actual).isEqualTo(expected);
+        assertThat(fileCreatorService.getNumberOfPossibleCombinationsVariation(givenChars, 4)).isEqualTo(625);
+    }
+
+    @Test
     void calculateFactorialWhenGivenBasis() {
         //given
         int basisOfFactorial = 5;
