@@ -4,6 +4,9 @@ import me.edrone.recruitmenttask.dto.FileDto;
 import me.edrone.recruitmenttask.entity.FileEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class FileMapper {
 
@@ -15,6 +18,12 @@ public class FileMapper {
         dto.setMaxLengthOfTargetString(fileEntity.getMaxLengthOfTargetString());
         dto.setNumberOfTargetStrings(fileEntity.getNumberOfTargetStrings());
         return dto;
+    }
+
+    public List<FileDto> toDto(List<FileEntity> files) {
+        return files.stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
     }
 
     public FileEntity toEntity(FileDto fileDto) {
