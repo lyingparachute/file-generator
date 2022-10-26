@@ -1,13 +1,28 @@
 package me.edrone.recruitmenttask.service;
+import me.edrone.recruitmenttask.dto.FileDto;
+import me.edrone.recruitmenttask.entity.FileEntity;
+import me.edrone.recruitmenttask.repository.FileRepository;
+import me.edrone.recruitmenttask.repository.StringRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.stream.IntStream;
 
 
 @Service
-public class FileCreatorService {
+public class FileService {
+
+    private final FileRepository fileRepository;
+    private final StringRepository stringRepository;
+    private final FileMapper fileMapper;
+
+    public FileService(FileRepository fileRepository, StringRepository stringRepository, FileMapper fileMapper) {
+        this.fileRepository = fileRepository;
+        this.stringRepository = stringRepository;
+        this.fileMapper = fileMapper;
+    }
 
     // Number of possible combinations without repeating letters
     // for example: from String "abc" -> "aaa" is NOT possible
@@ -42,6 +57,11 @@ public class FileCreatorService {
 
     private boolean isNumberOfTargetStringsTooBig(char[] chars, int targetStringLength, int numberOfTargetStrings) {
         return numberOfTargetStrings > getNumberOfPossibleCombinationsVariation(chars, targetStringLength);
+    }
+
+    public List<FileDto> getAllCurrentJobs() {
+        List<FileEntity> all = fileRepository.findAll();
+        return fileMapper.toDto(all);
     }
 
 }
