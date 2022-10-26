@@ -56,4 +56,19 @@ class FileCreatorServiceTest {
         assertThat(fileCreatorService.calculateFactorial(4)).isEqualTo(24);
         assertThat(fileCreatorService.calculateFactorial(10)).isEqualTo(3628800);
     }
+
+    @Test
+    void getSetOfStringsGivenCharArrayLengthOfTargetStringAndDesiredNumberOfTargetStrings() throws Exception{
+        //given
+        char[] givenChars = {'a', 'b', 'c', 'd', 'e'};
+        int targetStringLength = 3;
+        int numberOfTargetStrings = 125;
+        //when
+        HashSet<String> actual = fileCreatorService.
+                getSetOfStrings(givenChars, targetStringLength, numberOfTargetStrings);
+        //then
+        assertThat(actual.size()).isEqualTo(numberOfTargetStrings);
+    }
+
+
 }
