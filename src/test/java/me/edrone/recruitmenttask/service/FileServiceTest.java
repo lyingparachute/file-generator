@@ -9,10 +9,10 @@ import java.util.HashSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class FileCreatorServiceTest {
+class FileServiceTest {
 
     @Autowired
-    FileCreatorService fileCreatorService;
+    FileService fileService;
 
 
     @Test
@@ -22,11 +22,11 @@ class FileCreatorServiceTest {
         int targetStringLength = 3;
         Integer expected = 60;
         //when
-        Integer actual = fileCreatorService.getNumberOfPossibleCombinations(givenChars, targetStringLength);
+        Integer actual = fileService.getNumberOfPossibleCombinations(givenChars, targetStringLength);
         //then
         assertThat(actual).isEqualTo(expected);
-        assertThat(fileCreatorService.getNumberOfPossibleCombinations(givenChars, 4)).isEqualTo(120);
-        assertThat(fileCreatorService.getNumberOfPossibleCombinations(givenChars, 5)).isEqualTo(120);
+        assertThat(fileService.getNumberOfPossibleCombinations(givenChars, 4)).isEqualTo(120);
+        assertThat(fileService.getNumberOfPossibleCombinations(givenChars, 5)).isEqualTo(120);
     }
 
     @Test
@@ -36,10 +36,10 @@ class FileCreatorServiceTest {
         int targetStringLength = 3;
         Integer expected = 125;
         //when
-        Integer actual = fileCreatorService.getNumberOfPossibleCombinationsVariation(givenChars, targetStringLength);
+        Integer actual = fileService.getNumberOfPossibleCombinationsVariation(givenChars, targetStringLength);
         //then
         assertThat(actual).isEqualTo(expected);
-        assertThat(fileCreatorService.getNumberOfPossibleCombinationsVariation(givenChars, 4)).isEqualTo(625);
+        assertThat(fileService.getNumberOfPossibleCombinationsVariation(givenChars, 4)).isEqualTo(625);
     }
 
     @Test
@@ -48,13 +48,13 @@ class FileCreatorServiceTest {
         int basisOfFactorial = 5;
         Integer expected = 120;
         //when
-        Integer actual = fileCreatorService.calculateFactorial(basisOfFactorial);
+        Integer actual = fileService.calculateFactorial(basisOfFactorial);
         //then
         assertThat(actual).isEqualTo(expected);
-        assertThat(fileCreatorService.calculateFactorial(0)).isEqualTo(1);
-        assertThat(fileCreatorService.calculateFactorial(1)).isEqualTo(1);
-        assertThat(fileCreatorService.calculateFactorial(4)).isEqualTo(24);
-        assertThat(fileCreatorService.calculateFactorial(10)).isEqualTo(3628800);
+        assertThat(fileService.calculateFactorial(0)).isEqualTo(1);
+        assertThat(fileService.calculateFactorial(1)).isEqualTo(1);
+        assertThat(fileService.calculateFactorial(4)).isEqualTo(24);
+        assertThat(fileService.calculateFactorial(10)).isEqualTo(3628800);
     }
 
     @Test
@@ -64,7 +64,7 @@ class FileCreatorServiceTest {
         int targetStringLength = 3;
         int numberOfTargetStrings = 125;
         //when
-        HashSet<String> actual = fileCreatorService.
+        HashSet<String> actual = fileService.
                 getSetOfStrings(givenChars, targetStringLength, numberOfTargetStrings);
         //then
         assertThat(actual.size()).isEqualTo(numberOfTargetStrings);
