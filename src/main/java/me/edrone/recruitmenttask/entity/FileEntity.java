@@ -28,7 +28,7 @@ public class FileEntity {
     private int numberOfTargetStrings;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private Set<String> setOfStrings = new HashSet<>();
+    private Set<String> setOfStrings;
 
     @Override
     public boolean equals(Object o) {

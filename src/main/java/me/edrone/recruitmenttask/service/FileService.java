@@ -61,13 +61,13 @@ public class FileService {
     }
 
     public List<FileDto> getAllCurrentJobs() {
+        List<Set<String>> sets = fileRepository.findAll().stream().map(FileEntity::getSetOfStrings).toList();
         List<FileEntity> all = fileRepository.findAll();
         return fileMapper.toDto(all);
     }
 
-    public List<FileDto> getAllCurrentJobsWithStrings() {
-        List<FileEntity> all = fileRepository.findAllWithStringSet();
-        return fileMapper.toDto(all);
+    public List<Long> getIdsOfCurrentJobs() {
+        return fileRepository.findAll().stream().map(FileEntity::getId).toList();
     }
 
     @Transactional

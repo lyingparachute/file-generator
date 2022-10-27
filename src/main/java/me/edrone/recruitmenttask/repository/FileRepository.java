@@ -11,12 +11,6 @@ import java.util.Set;
 public interface FileRepository extends JpaRepository<FileEntity, Long> {
 //    Set<String> findByIdAnd
 
-
-    @Query("select f from FileEntity f left join fetch f.setOfStrings")
-    List<FileEntity> findAllWithStringSet();
-
-
-    @Override
     @EntityGraph(attributePaths = "setOfStrings")
     List<FileEntity> findAll();
 }
