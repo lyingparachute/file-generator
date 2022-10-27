@@ -2,7 +2,6 @@ package me.edrone.recruitmenttask.dto;
 
 
 import lombok.Data;
-import me.edrone.recruitmenttask.entity.StringEntity;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,5 +13,5 @@ public class FileDto {
     private int minLengthOfTargetString;
     private int maxLengthOfTargetString;
     private int numberOfTargetStrings;
-    private Set<StringEntity> setOfStrings = new HashSet<>();
+    private Set<String> setOfStrings = new HashSet<>();
 }

@@ -4,6 +4,7 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,8 +27,8 @@ public class FileEntity {
     @Column(nullable = false)
     private int numberOfTargetStrings;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<StringEntity> setOfStrings;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<String> setOfStrings;
 
     @Override
     public boolean equals(Object o) {
