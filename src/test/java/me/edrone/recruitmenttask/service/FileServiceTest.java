@@ -50,6 +50,22 @@ class FileServiceTest {
     }
 
     @Test
+    void returnNumberOfPossibleCombinationsVariation_givenCharArrayMinAndMaxLengthOfTargetString() {
+        //given
+        char[] givenChars = {'a', 'b', 'c', 'd', 'e'};
+        int minTargetStringLength = 2;
+        int maxTargetStringLength = 4;
+        Integer expectedResult = 775;
+
+        //when
+        Integer actualResult = fileService.getNumberOfPossibleCombinationsVariation(givenChars, minTargetStringLength, maxTargetStringLength);
+
+        //then
+        assertThat(actualResult).isEqualTo(expectedResult);
+        assertThat(fileService.getNumberOfPossibleCombinationsVariation(givenChars, 4, 4)).isEqualTo(625);
+    }
+
+    @Test
     void returnFactorial_givenBasis() {
         //given
         int basisOfFactorial = 5;
@@ -80,6 +96,23 @@ class FileServiceTest {
         //then
         assertThat(actual.size()).isEqualTo(numberOfTargetStrings);
         assertThat(actual).contains("aaa", "bbb", "ccc", "ddd", "eee", "aae", "eaa", "aee", "eea");
+    }
+
+    @Test
+    void returnSetOfStrings_givenCharArrayMinMaxLengthOfTargetStringAndDesiredNumberOfTargetStrings() throws IllegalNumberOfTargetStringsException  {
+        //given
+        char[] givenChars = {'a', 'b', 'c', 'd', 'e'};
+        int minTargetStringLength = 2;
+        int maxTargetStringLength = 4;
+        int numberOfTargetStrings = 775;
+
+        //when
+        HashSet<String> actual = fileService.
+                getSetOfStrings(givenChars, minTargetStringLength, maxTargetStringLength, numberOfTargetStrings);
+
+        //then
+        assertThat(actual.size()).isEqualTo(numberOfTargetStrings);
+        assertThat(actual).contains("aaaa", "bb", "ccc", "dddd", "ee", "aaee", "eaaa", "aee", "ea");
     }
 
     @Test
