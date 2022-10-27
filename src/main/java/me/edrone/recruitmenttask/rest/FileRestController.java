@@ -20,13 +20,13 @@ public class FileRestController {
     }
 
     @GetMapping("jobs")
-    public ResponseEntity<FileDto> getCurrentJobs() {
-        return null;
+    public ResponseEntity<List<FileDto>> getCurrentJobs() {
+        return ResponseEntity.ok(fileService.getAllCurrentJobs());
     }
 
     @GetMapping()
     public ResponseEntity<List<FileDto>> getCurrentJobsResults() {
-        return ResponseEntity.ok(fileService.getAllCurrentJobs());
+        return ResponseEntity.ok(fileService.getAllCurrentJobsWithStrings());
     }
 
     @PostMapping("create")

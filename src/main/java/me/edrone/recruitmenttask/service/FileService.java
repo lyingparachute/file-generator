@@ -2,7 +2,6 @@ package me.edrone.recruitmenttask.service;
 
 import me.edrone.recruitmenttask.dto.FileDto;
 import me.edrone.recruitmenttask.entity.FileEntity;
-import me.edrone.recruitmenttask.entity.StringEntity;
 import me.edrone.recruitmenttask.exception.IllegalNumberOfTargetStringsException;
 import me.edrone.recruitmenttask.repository.FileRepository;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -66,13 +65,21 @@ public class FileService {
         return fileMapper.toDto(all);
     }
 
+    public List<FileDto> getAllCurrentJobsWithStrings() {
+        List<FileEntity> all = fileRepository.findAllWithStringSet();
+        return fileMapper.toDto(all);
+    }
+
     @Transactional
     public FileDto create(FileDto dto) {
-        StringEntity stringEntity = new StringEntity();
         FileEntity file = fileMapper.toEntity(dto);
-        FileEntity saved = fileRepository.save(file);
         HashSet<String> setOfStrings = getSetOfStrings(dto.getAvailableChars().toCharArray(), dto.getMinLengthOfTargetString(), dto.getNumberOfTargetStrings());
-
+        file.setSetOfStrings(setOfStrings);
+        FileEntity saved = fileRepository.save(file);
         return fileMapper.toDto(saved);
+    }
+
+    public HashSet<String> getStringsFromParticularFile(Long id){
+        return null;
     }
 }
