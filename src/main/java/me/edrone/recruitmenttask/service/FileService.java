@@ -1,8 +1,9 @@
 package me.edrone.recruitmenttask.service;
+
 import me.edrone.recruitmenttask.dto.FileDto;
 import me.edrone.recruitmenttask.entity.FileEntity;
+import me.edrone.recruitmenttask.exception.IllegalNumberOfTargetStringsException;
 import me.edrone.recruitmenttask.repository.FileRepository;
-import me.edrone.recruitmenttask.repository.StringRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +16,11 @@ import java.util.stream.IntStream;
 public class FileService {
 
     private final FileRepository fileRepository;
-    private final StringRepository stringRepository;
     private final FileMapper fileMapper;
 
-    public FileService(FileRepository fileRepository, StringRepository stringRepository, FileMapper fileMapper) {
+
+    public FileService(FileRepository fileRepository, FileMapper fileMapper) {
         this.fileRepository = fileRepository;
-        this.stringRepository = stringRepository;
         this.fileMapper = fileMapper;
     }
 
@@ -29,7 +29,7 @@ public class FileService {
     public Integer getNumberOfPossibleCombinations(char[] chars, int targetStringLength) {
         int numOfChars = chars.length;
         int subtractionResult = Math.subtractExact(numOfChars, targetStringLength);
-        return Math.floorDiv(calculateFactorial(numOfChars),calculateFactorial(subtractionResult));
+        return Math.floorDiv(calculateFactorial(numOfChars), calculateFactorial(subtractionResult));
     }
 
     // Number of possible combinations with possibility of repeating letters
@@ -43,10 +43,10 @@ public class FileService {
                 .reduce(1, (int x, int y) -> x * y);
     }
 
-    public HashSet<String> getSetOfStrings(char[] chars, int targetStringLength, int numberOfTargetStrings) throws Exception{
+    public HashSet<String> getSetOfStrings(char[] chars, int targetStringLength, int numberOfTargetStrings) throws IllegalNumberOfTargetStringsException {
         HashSet<String> setOfStrings = new HashSet<>();
-        if (isNumberOfTargetStringsTooBig(chars, targetStringLength, numberOfTargetStrings)){
-            throw new Exception();
+        if (isNumberOfTargetStringsTooBig(chars, targetStringLength, numberOfTargetStrings)) {
+            throw new IllegalNumberOfTargetStringsException();
         }
         while (setOfStrings.size() < numberOfTargetStrings) {
             String randomString = RandomStringUtils.random(targetStringLength, chars);
