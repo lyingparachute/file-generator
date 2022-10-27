@@ -2,11 +2,13 @@ package me.edrone.recruitmenttask.service;
 
 import me.edrone.recruitmenttask.dto.FileDto;
 import me.edrone.recruitmenttask.entity.FileEntity;
+import me.edrone.recruitmenttask.entity.StringEntity;
 import me.edrone.recruitmenttask.exception.IllegalNumberOfTargetStringsException;
 import me.edrone.recruitmenttask.repository.FileRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -64,4 +66,13 @@ public class FileService {
         return fileMapper.toDto(all);
     }
 
+    @Transactional
+    public FileDto create(FileDto dto) {
+        StringEntity stringEntity = new StringEntity();
+        FileEntity file = fileMapper.toEntity(dto);
+        FileEntity saved = fileRepository.save(file);
+        HashSet<String> setOfStrings = getSetOfStrings(dto.getAvailableChars().toCharArray(), dto.getMinLengthOfTargetString(), dto.getNumberOfTargetStrings());
+
+        return fileMapper.toDto(saved);
+    }
 }
