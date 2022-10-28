@@ -4,16 +4,14 @@ import me.edrone.recruitmenttask.dto.FileDto;
 import me.edrone.recruitmenttask.entity.FileEntity;
 import me.edrone.recruitmenttask.exception.IllegalNumberOfTargetStringsException;
 import me.edrone.recruitmenttask.repository.FileRepository;
+import me.edrone.recruitmenttask.util.FileMapper;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.apache.commons.lang3.RandomUtils;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 

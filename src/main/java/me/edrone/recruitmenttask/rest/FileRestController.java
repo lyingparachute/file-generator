@@ -3,7 +3,7 @@ package me.edrone.recruitmenttask.rest;
 
 import me.edrone.recruitmenttask.dto.FileDto;
 import me.edrone.recruitmenttask.service.FileService;
-import me.edrone.recruitmenttask.util.LocalFile;
+import me.edrone.recruitmenttask.service.LocalFile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

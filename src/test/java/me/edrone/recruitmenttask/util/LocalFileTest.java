@@ -1,9 +1,9 @@
 package me.edrone.recruitmenttask.util;
 
 import me.edrone.recruitmenttask.dto.FileDto;
-import me.edrone.recruitmenttask.entity.FileEntity;
 import me.edrone.recruitmenttask.repository.FileRepository;
 import me.edrone.recruitmenttask.service.FileService;
+import me.edrone.recruitmenttask.service.LocalFile;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;

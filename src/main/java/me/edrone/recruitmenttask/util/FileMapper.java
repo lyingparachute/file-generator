@@ -1,4 +1,4 @@
-package me.edrone.recruitmenttask.service;
+package me.edrone.recruitmenttask.util;
 
 import me.edrone.recruitmenttask.dto.FileDto;
 import me.edrone.recruitmenttask.entity.FileEntity;
