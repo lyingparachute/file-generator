@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Set;
 
 public interface FileRepository extends JpaRepository<FileEntity, Long> {
-//    Set<String> findByIdAnd
-
     @EntityGraph(attributePaths = "setOfStrings")
     List<FileEntity> findAll();
 }
