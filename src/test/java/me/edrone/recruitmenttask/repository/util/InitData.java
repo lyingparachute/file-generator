@@ -29,7 +29,7 @@ public class InitData {
         new File(FILE_NAME).delete();
     }
 
-    public FileDto createFileDto () {
+    public FileDto createFileDto()  {
         FileDto fileDto = new FileDto();
         fileDto.setAvailableChars("abcde");
         fileDto.setMinLengthOfTargetString(2);
@@ -37,6 +37,7 @@ public class InitData {
         fileDto.setNumberOfTargetStrings(5);
         return fileService.create(fileDto);
     }
+
 
 
 

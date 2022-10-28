@@ -23,7 +23,7 @@ public class FileRestController {
     }
 
     @GetMapping("jobs")
-    public ResponseEntity<List<Long>> getCurrentJobs() {
+    public ResponseEntity<List<Long>> getCurrentJobsIds() {
         return ResponseEntity.ok(fileService.getIdsOfCurrentJobs());
     }
 
