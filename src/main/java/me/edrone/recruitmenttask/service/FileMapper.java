@@ -17,6 +17,7 @@ public class FileMapper {
         dto.setMinLengthOfTargetString(fileEntity.getMinLengthOfTargetString());
         dto.setMaxLengthOfTargetString(fileEntity.getMaxLengthOfTargetString());
         dto.setNumberOfTargetStrings(fileEntity.getNumberOfTargetStrings());
+        dto.setSetOfStrings(fileEntity.getSetOfStrings());
         return dto;
     }
 
@@ -33,6 +34,7 @@ public class FileMapper {
         entity.setMinLengthOfTargetString(fileDto.getMinLengthOfTargetString());
         entity.setMaxLengthOfTargetString(fileDto.getMaxLengthOfTargetString());
         entity.setNumberOfTargetStrings(fileDto.getNumberOfTargetStrings());
+        entity.setSetOfStrings(fileDto.getSetOfStrings());
         return entity;
     }
 
