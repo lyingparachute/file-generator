@@ -15,13 +15,13 @@ class FileRestControllerTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    @LocalServerPort
+    int randomServerPort;
+
     @BeforeEach
     public void setUp() {
 
     }
-
-    @LocalServerPort
-    int randomServerPort;
 
     @Test
     void getCurrentJobs() {
