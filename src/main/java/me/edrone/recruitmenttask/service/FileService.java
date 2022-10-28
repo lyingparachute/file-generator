@@ -106,11 +106,6 @@ public class FileService {
         return fileMapper.toDto(saved);
     }
 
-    public HashSet<String> getStringsFromParticularFile(Long id){
-        return null;
-    }
-
-
     private boolean isNumberOfTargetStringsTooBig(char[] chars, int targetStringLength, int numberOfTargetStrings) {
         return numberOfTargetStrings > getNumberOfPossibleCombinationsVariation(chars, targetStringLength);
     }
