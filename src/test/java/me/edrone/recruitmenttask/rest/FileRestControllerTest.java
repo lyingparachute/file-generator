@@ -5,6 +5,7 @@ import me.edrone.recruitmenttask.entity.FileEntity;
 import me.edrone.recruitmenttask.repository.FileRepository;
 import me.edrone.recruitmenttask.repository.util.InitData;
 import org.assertj.core.groups.Tuple;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,7 @@ class FileRestControllerTest {
     int randomServerPort;
 
     @BeforeEach
+    @AfterEach
     public void setUp() {
         initData.cleanUp();
         initData.cleanUpFiles();

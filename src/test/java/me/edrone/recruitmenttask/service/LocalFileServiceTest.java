@@ -3,8 +3,6 @@ package me.edrone.recruitmenttask.service;
 import me.edrone.recruitmenttask.dto.FileDto;
 import me.edrone.recruitmenttask.repository.FileRepository;
 import me.edrone.recruitmenttask.repository.util.InitData;
-import me.edrone.recruitmenttask.service.FileService;
-import me.edrone.recruitmenttask.service.LocalFileService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,7 +15,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -52,8 +49,8 @@ class LocalFileServiceTest {
 
         //then
         assertThat(created).isNotNull();
-        assertTrue(Files.exists(Path.of(InitData.FILE_NAME)));
-        assertThat(new File(InitData.FILE_NAME)).isFile();
+        assertTrue(Files.exists(Path.of(InitData.FILE_1_NAME)));
+        assertThat(new File(InitData.FILE_1_NAME)).isFile();
 
     }
 }

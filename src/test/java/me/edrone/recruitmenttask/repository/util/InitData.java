@@ -12,7 +12,11 @@ import java.io.File;
 @Component
 public class InitData {
 
-    public static final String FILE_NAME = "src/main/resources/files/1.txt";
+    public static final String FILE_1_NAME = "src/main/resources/files/1.txt";
+
+    public static final String FILE_2_NAME = "src/main/resources/files/2.txt";
+
+    public static final String FILE_3_NAME = "src/main/resources/files/3.txt";
 
     @Autowired
     private FileRepository fileRepository;
@@ -26,7 +30,9 @@ public class InitData {
     }
 
     public void cleanUpFiles() {
-        new File(FILE_NAME).delete();
+        new File(FILE_1_NAME).delete();
+        new File(FILE_2_NAME).delete();
+        new File(FILE_3_NAME).delete();
     }
 
     public FileDto createFileDto()  {
