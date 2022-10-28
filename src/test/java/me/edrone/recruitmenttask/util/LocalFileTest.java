@@ -5,7 +5,6 @@ import me.edrone.recruitmenttask.entity.FileEntity;
 import me.edrone.recruitmenttask.repository.FileRepository;
 import me.edrone.recruitmenttask.service.FileService;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,9 +44,7 @@ class LocalFileTest {
         FileDto fileDto = createFileDto();
 
         //when
-        Optional<FileEntity> byId = fileRepository.findById( fileDto.getId());
-        assertThat(byId.isPresent()).isTrue();
-        BufferedWriter created = localFile.create(byId.get());
+        BufferedWriter created = localFile.createFile(fileDto);
 
         //then
         assertThat(created).isNotNull();

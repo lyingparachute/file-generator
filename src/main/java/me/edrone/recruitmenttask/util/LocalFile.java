@@ -1,5 +1,6 @@
 package me.edrone.recruitmenttask.util;
 
+import me.edrone.recruitmenttask.dto.FileDto;
 import me.edrone.recruitmenttask.entity.FileEntity;
 import org.springframework.stereotype.Component;
 
@@ -15,10 +16,10 @@ public class LocalFile {
     private final String FILE_PATH = "src/main/resources/files/";
 
 
-    public BufferedWriter create(FileEntity fileEntity){
-        new File(FILE_PATH).mkdirs();
-        String fileName = FILE_PATH + fileEntity.getId() + ".txt";
-        Set<String> setOfStrings = fileEntity.getSetOfStrings();
+    public BufferedWriter createFile(FileDto fileDto) {
+        createDirectory();
+        String fileName = FILE_PATH + fileDto.getId() + ".txt";
+        Set<String> setOfStrings = fileDto.getSetOfStrings();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true))) {
             for (String s : setOfStrings) {
                 writer.write(s);
@@ -28,5 +29,9 @@ public class LocalFile {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void createDirectory() {
+        new File(FILE_PATH).mkdirs();
     }
 }
