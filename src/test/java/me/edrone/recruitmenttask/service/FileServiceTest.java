@@ -9,7 +9,6 @@ import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class FileServiceTest {
@@ -83,7 +82,7 @@ class FileServiceTest {
     }
 
     @Test
-    void returnSetOfStrings_givenCharArrayLengthOfTargetStringAndDesiredNumberOfTargetStrings() throws IllegalNumberOfTargetStringsException  {
+    void returnSetOfStrings_givenCharArrayLengthOfTargetStringAndDesiredNumberOfTargetStrings() throws IllegalNumberOfTargetStringsException {
         //given
         char[] givenChars = {'a', 'b', 'c', 'd', 'e'};
         int targetStringLength = 3;
@@ -99,7 +98,7 @@ class FileServiceTest {
     }
 
     @Test
-    void returnSetOfStrings_givenCharArrayMinMaxLengthOfTargetStringAndDesiredNumberOfTargetStrings() throws IllegalNumberOfTargetStringsException  {
+    void returnSetOfStrings_givenCharArrayMinMaxLengthOfTargetStringAndDesiredNumberOfTargetStrings() throws IllegalNumberOfTargetStringsException {
         //given
         char[] givenChars = {'a', 'b', 'c', 'd', 'e'};
         int minTargetStringLength = 2;
