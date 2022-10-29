@@ -1,7 +1,7 @@
 package me.edrone.recruitmenttask.service;
 
 import me.edrone.recruitmenttask.dto.FileDto;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Set;
 
-@Component
+@Service
 public class LocalFileService {
 
     private final String FILE_PATH = "src/main/resources/files/";
