@@ -42,7 +42,6 @@ public class FileRestController {
 
     @GetMapping()
     public CompletableFuture<ResponseEntity<List<FileEntityDto>>> getCurrentJobsResults() {
-//        return ResponseEntity.ok(fileService.getAllCurrentJobs());
         return fileService.getAllCurrentJobs().thenApply(ResponseEntity::ok);
     }
 
