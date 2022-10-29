@@ -1,22 +1,28 @@
 package me.edrone.recruitmenttask.service;
 
-import me.edrone.recruitmenttask.dto.FileDto;
+import me.edrone.recruitmenttask.dto.FileEntityDto;
 import me.edrone.recruitmenttask.entity.FileEntity;
 import me.edrone.recruitmenttask.exception.IllegalNumberOfTargetStringsException;
 import me.edrone.recruitmenttask.repository.FileRepository;
 import me.edrone.recruitmenttask.util.FileMapper;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.IntStream;
 
 
 @Service
 public class FileService {
+
+    private final static Logger LOGGER = LoggerFactory.getLogger(FileService.class);
 
     private final FileRepository fileRepository;
     private final FileMapper fileMapper;
@@ -81,18 +87,25 @@ public class FileService {
         return setOfStrings;
     }
 
-    public List<FileDto> getAllCurrentJobs() {
+    @Async
+    public CompletableFuture<List<FileEntityDto>> getAllCurrentJobs() {
+        LOGGER.info("Request to get all files");
         List<Set<String>> sets = fileRepository.findAll().stream().map(FileEntity::getSetOfStrings).toList();
         List<FileEntity> all = fileRepository.findAll();
-        return fileMapper.toDto(all);
+        return CompletableFuture.completedFuture(fileMapper.toDto(all));
     }
 
-    public List<Long> getIdsOfCurrentJobs() {
-        return fileRepository.findAll().stream().map(FileEntity::getId).toList();
+    @Async
+    public CompletableFuture<List<Long>> getIdsOfCurrentJobs() {
+        LOGGER.info("Request to get Ids of all files");
+        return CompletableFuture.completedFuture(fileRepository.findAll().stream().map(FileEntity::getId).toList());
     }
 
     @Transactional
-    public FileDto create(FileDto dto) {
+    @Async
+    public CompletableFuture<FileEntityDto> create(FileEntityDto dto) {
+        final long start = System.currentTimeMillis();
+        LOGGER.info("Saving a file with number of target Strings: {} ", dto.getNumberOfTargetStrings());
         FileEntity file = fileMapper.toEntity(dto);
         HashSet<String> setOfStrings = getSetOfStrings(
                 dto.getAvailableChars().toCharArray(),
@@ -101,7 +114,10 @@ public class FileService {
                 dto.getNumberOfTargetStrings());
         file.setSetOfStrings(setOfStrings);
         FileEntity saved = fileRepository.save(file);
-        return fileMapper.toDto(saved);
+        LOGGER.info("Created a file in database with number of target Strings: {} and ID: {}.",
+                saved.getNumberOfTargetStrings(), saved.getId());
+        LOGGER.info("Elapsed process time: {} ms.", (System.currentTimeMillis() - start));
+        return CompletableFuture.completedFuture(fileMapper.toDto(saved));
     }
 
     private boolean isNumberOfTargetStringsTooBig(char[] chars, int targetStringLength, int numberOfTargetStrings) {
