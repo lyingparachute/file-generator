@@ -48,7 +48,7 @@ class LocalFileServiceTest {
         FileEntityDto fileEntityDto = initData.createFileDto();
 
         //when
-        BufferedWriter created = localFileService.createFile(CompletableFuture.completedFuture(fileEntityDto));
+        CompletableFuture<BufferedWriter> created = localFileService.createFile(CompletableFuture.completedFuture(fileEntityDto));
 
         //then
         assertThat(created).isNotNull();

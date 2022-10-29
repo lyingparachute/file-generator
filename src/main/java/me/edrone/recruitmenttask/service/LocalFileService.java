@@ -3,6 +3,7 @@ package me.edrone.recruitmenttask.service;
 import me.edrone.recruitmenttask.dto.FileEntityDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.BufferedWriter;
@@ -19,7 +20,8 @@ public class LocalFileService {
     private final String FILE_PATH = "src/main/resources/files/";
     private final Logger LOGGER = LoggerFactory.getLogger(LocalFileService.class);
 
-    public BufferedWriter createFile(CompletableFuture<FileEntityDto> fileDto) {
+    @Async
+    public CompletableFuture<BufferedWriter> createFile(CompletableFuture<FileEntityDto> fileDto) {
         createDirectory();
         String fileNameWithPath;
         String fileName;
@@ -40,7 +42,7 @@ public class LocalFileService {
                 writer.newLine();
             }
             LOGGER.info("File {} saved successfully to a local directory {}", fileName, FILE_PATH);
-            return writer;
+            return CompletableFuture.completedFuture(writer);
         } catch (IOException e) {
             LOGGER.error("Could not save local file file due to IOException");
             throw new RuntimeException(e);
