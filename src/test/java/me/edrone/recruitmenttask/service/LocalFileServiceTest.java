@@ -14,6 +14,7 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import static me.edrone.recruitmenttask.repository.util.InitData.FILE_DIRECTORY;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,7 +37,7 @@ class LocalFileServiceTest {
     @BeforeEach
     public void cleanUp() {
         initData.cleanUpFiles();
-        initData.cleanUp();
+        initData.cleanUpRepository();
     }
 
     @Test
@@ -49,8 +50,9 @@ class LocalFileServiceTest {
 
         //then
         assertThat(created).isNotNull();
-        assertTrue(Files.exists(Path.of(InitData.FILE_1_NAME)));
-        assertThat(new File(InitData.FILE_1_NAME)).isFile();
+        String FILE_NAME = FILE_DIRECTORY + fileDto.getId() + ".txt";
+        assertTrue(Files.exists(Path.of(FILE_NAME)));
+        assertThat(new File(FILE_NAME)).isFile();
 
     }
 }

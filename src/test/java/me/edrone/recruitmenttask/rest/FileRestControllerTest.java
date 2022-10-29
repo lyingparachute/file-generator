@@ -1,10 +1,8 @@
 package me.edrone.recruitmenttask.rest;
 
 import me.edrone.recruitmenttask.dto.FileDto;
-import me.edrone.recruitmenttask.entity.FileEntity;
 import me.edrone.recruitmenttask.repository.FileRepository;
 import me.edrone.recruitmenttask.repository.util.InitData;
-import org.assertj.core.groups.Tuple;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -17,12 +15,10 @@ import org.springframework.http.ResponseEntity;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class FileRestControllerTest {
@@ -42,7 +38,7 @@ class FileRestControllerTest {
     @BeforeEach
     @AfterEach
     public void setUp() {
-        initData.cleanUp();
+        initData.cleanUpRepository();
         initData.cleanUpFiles();
     }
 
