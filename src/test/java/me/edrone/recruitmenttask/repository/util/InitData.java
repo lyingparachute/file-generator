@@ -1,6 +1,7 @@
 package me.edrone.recruitmenttask.repository.util;
 
-import me.edrone.recruitmenttask.dto.FileDto;
+import lombok.SneakyThrows;
+import me.edrone.recruitmenttask.dto.FileEntityDto;
 import me.edrone.recruitmenttask.repository.FileRepository;
 import me.edrone.recruitmenttask.service.FileService;
 import org.aspectj.util.FileUtil;
@@ -21,7 +22,7 @@ public class InitData {
     private FileService fileService;
 
     @Transactional
-    public void cleanUpRepository(){
+    public void cleanUpRepository() {
         fileRepository.deleteAll();
     }
 
@@ -29,17 +30,15 @@ public class InitData {
         FileUtil.deleteContents(new File(FILE_DIRECTORY));
     }
 
-    public FileDto createFileDto()  {
-        FileDto fileDto = new FileDto();
-        fileDto.setAvailableChars("abcde");
-        fileDto.setMinLengthOfTargetString(2);
-        fileDto.setMaxLengthOfTargetString(3);
-        fileDto.setNumberOfTargetStrings(5);
-        return fileService.create(fileDto);
+    @SneakyThrows
+    public FileEntityDto createFileDto() {
+        FileEntityDto fileEntityDto = new FileEntityDto();
+        fileEntityDto.setAvailableChars("abcde");
+        fileEntityDto.setMinLengthOfTargetString(2);
+        fileEntityDto.setMaxLengthOfTargetString(3);
+        fileEntityDto.setNumberOfTargetStrings(5);
+        return fileService.create(fileEntityDto).get();
     }
-
-
-
 
 
 }

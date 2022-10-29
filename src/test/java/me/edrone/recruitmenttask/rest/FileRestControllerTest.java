@@ -1,6 +1,6 @@
 package me.edrone.recruitmenttask.rest;
 
-import me.edrone.recruitmenttask.dto.FileDto;
+import me.edrone.recruitmenttask.dto.FileEntityDto;
 import me.edrone.recruitmenttask.repository.FileRepository;
 import me.edrone.recruitmenttask.repository.util.InitData;
 import org.junit.jupiter.api.AfterEach;
@@ -17,6 +17,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutionException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,9 +44,9 @@ class FileRestControllerTest {
     }
 
     @Test
-    void shouldGetCurrentJobsIds() throws URISyntaxException {
+    void shouldGetCurrentJobsIds() throws URISyntaxException, ExecutionException, InterruptedException {
         //given
-        FileDto fileDto = initData.createFileDto();
+        FileEntityDto fileEntityDto = initData.createFileDto();
 
         //when
         URI url = createUrl("/api/files/jobs/");
@@ -58,11 +59,10 @@ class FileRestControllerTest {
     }
 
 
-
     @Test
-    void getCurrentJobsResults() throws URISyntaxException {
+    void shouldGetCurrentJobsResults() throws URISyntaxException {
         //given
-        FileDto fileDto = initData.createFileDto();
+        FileEntityDto fileEntityDto = initData.createFileDto();
 
         //when
         URI url = createUrl("/api/files/");
@@ -73,39 +73,29 @@ class FileRestControllerTest {
         Set actual = response.getBody();
         assertThat(actual).isNotNull();
         assertThat(actual.isEmpty()).isFalse();
-//        assertThat(actual).extracting(
-//                FileEntity::getId,
-//                FileEntity::getAvailableChars,
-//                FileEntity::getMinLengthOfTargetString,
-//                FileEntity::getMaxLengthOfTargetString,
-//                FileEntity::getNumberOfTargetStrings)
-//                .contains(
-//                        Tuple.tuple(fileDto.getId(), fileDto.getAvailableChars(),
-//                                fileDto.getMinLengthOfTargetString(), fileDto.getMaxLengthOfTargetString(),
-//                                fileDto.getNumberOfTargetStrings()));
     }
 
     @Test
-    void createJob() throws URISyntaxException {
+    void shouldCreateJob_givenEntity() throws URISyntaxException {
         //given
-        FileDto fileDto = initData.createFileDto();
+        FileEntityDto fileEntityDto = initData.createFileDto();
 
         //when
         URI url = createUrl("/api/files/create");
-        ResponseEntity<FileDto> response = restTemplate.postForEntity(url, fileDto, FileDto.class);
+        ResponseEntity<FileEntityDto> response = restTemplate.postForEntity(url, fileEntityDto, FileEntityDto.class);
 
         //then
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
-        FileDto actual = response.getBody();
+        FileEntityDto actual = response.getBody();
         assertThat(actual).isNotNull();
         assertThat(actual.getId()).isNotNull();
         fileRepository.findById(actual.getId())
                 .orElseThrow(() -> new IllegalStateException(
                         "File with ID: " + actual.getId() + " should not be missing"));
-        assertThat(actual.getAvailableChars()).isEqualTo(fileDto.getAvailableChars());
-        assertThat(actual.getMinLengthOfTargetString()).isEqualTo(fileDto.getMinLengthOfTargetString());
-        assertThat(actual.getMaxLengthOfTargetString()).isEqualTo(fileDto.getMaxLengthOfTargetString());
-        assertThat(actual.getNumberOfTargetStrings()).isEqualTo(fileDto.getNumberOfTargetStrings());
+        assertThat(actual.getAvailableChars()).isEqualTo(fileEntityDto.getAvailableChars());
+        assertThat(actual.getMinLengthOfTargetString()).isEqualTo(fileEntityDto.getMinLengthOfTargetString());
+        assertThat(actual.getMaxLengthOfTargetString()).isEqualTo(fileEntityDto.getMaxLengthOfTargetString());
+        assertThat(actual.getNumberOfTargetStrings()).isEqualTo(fileEntityDto.getNumberOfTargetStrings());
     }
 
 
