@@ -23,3 +23,27 @@
 
 * `mvn spring-boot:run`
 * Press CTRL+C to finish running app
+
+### 4. Test REST endpoints with Postman
+
+* Create file with 500.000 result Strings
+
+![](../../../Pictures/Screenshots/Screenshot from 2022-10-29 16-19-26.png)
+![](../../../Pictures/Screenshots/Screenshot from 2022-10-29 16-27-45.png)
+
+* Create file with 5 result Strings
+
+![](../../../Pictures/Screenshots/Screenshot from 2022-10-29 16-19-33.png)
+![](../../../Pictures/Screenshots/Screenshot from 2022-10-29 16-25-20.png)
+
+* Get IDs of all jobs
+
+![](../../../Pictures/Screenshots/Screenshot from 2022-10-29 16-19-53.png)
+
+* Get all jobs' values
+
+![](../../../Pictures/Screenshots/Screenshot from 2022-10-29 16-19-57.png)
+
+* Observe in Logs that file with 5 String (2.txt) was created before file with 500.000 Strings (1.txt)
+
+![](../../../Pictures/Screenshots/Screenshot from 2022-10-29 16-31-17.png)
