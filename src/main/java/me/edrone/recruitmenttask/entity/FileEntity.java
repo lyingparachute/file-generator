@@ -1,10 +1,10 @@
 package me.edrone.recruitmenttask.entity;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -12,7 +12,7 @@ import java.util.Set;
 @Table(name = "files")
 @Getter
 @Setter
-public class FileEntity {
+public class FileEntity extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
