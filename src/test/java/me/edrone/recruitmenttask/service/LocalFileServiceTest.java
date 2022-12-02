@@ -14,7 +14,6 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
 
 import static me.edrone.recruitmenttask.repository.util.InitData.FILE_DIRECTORY;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,7 +42,7 @@ class LocalFileServiceTest {
     }
 
     @Test
-    void createLocalFile_givenFileEntity() throws ExecutionException, InterruptedException {
+    void createLocalFile_givenFileEntity() {
         //given
         FileEntityDto fileEntityDto = initData.createFileDto();
 
